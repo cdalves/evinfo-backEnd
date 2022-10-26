@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Evento;
+import com.example.demo.repository.EventoRepository;
+import com.example.demo.request.EventoPostRequestBody;
+import com.example.demo.request.EventoPutRequestBody;
 import com.example.demo.service.EventoService;
 import com.example.demo.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("eventos")
@@ -29,19 +31,19 @@ public class EventoController {
     private final EventoService eventoService;
 
     @GetMapping
-    public ResponseEntity<List<Evento>> list(){
+    public ResponseEntity<EventoRepository> list(){
         log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return ResponseEntity.ok(eventoService.listAll());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Evento> findById(@PathVariable long id){
-        return ResponseEntity.ok(eventoService.findById(id));
+    public ResponseEntity<Evento> findByIdOrThrowBadRequestException(@PathVariable long id){
+        return ResponseEntity.ok(eventoService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
-    public ResponseEntity<Evento> save(@RequestBody Evento evento){
-        return new ResponseEntity<>(eventoService.save(evento), HttpStatus.CREATED); 
+    public ResponseEntity<Evento> save(@RequestBody EventoPostRequestBody eventoPostRequestBody){
+        return new ResponseEntity<>(eventoService.save(eventoPostRequestBody), HttpStatus.CREATED); 
     }
 
     @DeleteMapping(path = "/{id}")
@@ -51,8 +53,8 @@ public class EventoController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Evento evento) {
-        eventoService.replace(evento);
+    public ResponseEntity<Void> replace(@RequestBody EventoPutRequestBody eventoPutRequestBody) {
+        eventoService.replace(eventoPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
