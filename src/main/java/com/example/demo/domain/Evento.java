@@ -16,8 +16,8 @@ import lombok.Data;
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long idUser;
+    private long id;
+    private long idUser;
     private String nome;
     private String descricao;
     private String data;
