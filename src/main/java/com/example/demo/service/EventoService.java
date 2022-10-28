@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Evento;
+import com.example.demo.mapper.EventoMapper;
 import com.example.demo.repository.EventoRepository;
 import com.example.demo.request.EventoPostRequestBody;
 import com.example.demo.request.EventoPutRequestBody;
@@ -31,7 +32,7 @@ public class EventoService {
     }
 
     public Evento save(EventoPostRequestBody eventoPostRequestBody){
-        return eventoRepository.save(Evento.builder().nome(eventoPostRequestBody.getName()).build());
+        return eventoRepository.save(EventoMapper.INSTANCE.toEvento(eventoPostRequestBody));
     }
 
     public void delete(long id) {
@@ -39,11 +40,9 @@ public class EventoService {
     }
 
     public void replace(EventoPutRequestBody eventoPutRequestBody) {
-        findByIdOrThrowBadRequestException(eventoPutRequestBody.getId());
-        Evento evento = Evento.builder()
-                        .id(eventoPutRequestBody.getId())
-                        .nome(eventoPutRequestBody.getName())
-                        .build();
+        Evento savedEvento = findByIdOrThrowBadRequestException(eventoPutRequestBody.getId());
+        Evento evento = EventoMapper.INSTANCE.toEvento(eventoPutRequestBody);
+        evento.setId(savedEvento.getId());
         eventoRepository.save(evento);
     }
 }

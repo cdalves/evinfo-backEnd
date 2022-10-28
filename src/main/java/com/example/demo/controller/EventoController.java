@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 //importe da classe eventos 
 import com.example.demo.domain.Evento;
-import com.example.demo.repository.EventoRepository;
 import com.example.demo.request.EventoPostRequestBody;
 import com.example.demo.request.EventoPutRequestBody;
 import com.example.demo.service.EventoService;

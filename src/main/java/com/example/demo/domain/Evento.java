@@ -18,7 +18,7 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long idUser;
-    private String nome;
+    private String name;
     private String descricao;
     private String data;
     

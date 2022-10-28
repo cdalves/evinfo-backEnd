@@ -4,6 +4,9 @@ import lombok.Data;
 
 @Data
 public class EventoPutRequestBody {
-    private Long id;
     private String name;
+    private Long id;
+    private Long idUser;
+    private String descricao;
+    private String data;
 }
