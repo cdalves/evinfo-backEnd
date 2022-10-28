@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
-//importe da classe eventos 
-import com.example.demo.domain.Evento;
-import com.example.demo.request.EventoPostRequestBody;
-import com.example.demo.request.EventoPutRequestBody;
-import com.example.demo.service.EventoService;
+import com.example.demo.domain.Usuario;
+import com.example.demo.request.UsuarioPostRequestBody;
+import com.example.demo.request.UsuarioPutRequestBody;
+import com.example.demo.service.UsuarioService;
 import com.example.demo.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,38 +22,38 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("eventos")
+@RequestMapping("usuario")
 @Log4j2
 @RequiredArgsConstructor
-public class EventoController {
+public class UsuarioController {
     private final DateUtil dateUtil;
-    private final EventoService eventoService;
+    private final UsuarioService usuarioService;
 
     @GetMapping
-    public ResponseEntity<List<Evento>> list(){
+    public ResponseEntity<List<Usuario>> list(){
         log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return ResponseEntity.ok(eventoService.listAll());
+        return ResponseEntity.ok(usuarioService.listAll());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Evento> findByIdOrThrowBadRequestException(long id){
-        return ResponseEntity.ok(eventoService.findByIdOrThrowBadRequestException(id));
+    public ResponseEntity<Usuario> findByIdOrThrowBadRequestException(long id){
+        return ResponseEntity.ok(usuarioService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
-    public ResponseEntity<Evento> save(@RequestBody EventoPostRequestBody eventoPostRequestBody){
-        return new ResponseEntity<>(eventoService.save(eventoPostRequestBody), HttpStatus.CREATED); 
+    public ResponseEntity<Usuario> save(@RequestBody UsuarioPostRequestBody usuarioPostRequestBody){
+        return new ResponseEntity<>(usuarioService.save(usuarioPostRequestBody), HttpStatus.CREATED); 
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(long id) {
-        eventoService.delete(id);
+        usuarioService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody EventoPutRequestBody eventoPutRequestBody) {
-        eventoService.replace(eventoPutRequestBody);
+    public ResponseEntity<Void> replace(@RequestBody UsuarioPutRequestBody usuarioPutRequestBody) {
+        usuarioService.replace(usuarioPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
