@@ -13,15 +13,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class Evento {
+
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idUser;
     private String nome;
-    private String descricao;
-    private String data;
-    
-    public Evento(){}
-
+    private String email;
 }

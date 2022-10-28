@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,10 @@ public class EventoService {
 
     private final EventoRepository eventoRepository;
 
-    public EventoRepository listAll(){return eventoRepository;}
+
+    public List<Evento> listAll(){
+        return eventoRepository.findAll();
+    }
 
 
     public Evento findByIdOrThrowBadRequestException(long id) {
