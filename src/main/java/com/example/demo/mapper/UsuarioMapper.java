@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 public abstract class UsuarioMapper {
     public static final UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
 
-    public abstract Usuario toUsuario(UsuarioPostRequestBody animePostRequestBody);
+    public abstract Usuario toUsuario(UsuarioPostRequestBody usuarioPostRequestBody);
 
-    public abstract Usuario toUsuario(UsuarioPutRequestBody animePostRequestBody);
+    public abstract Usuario toUsuario(UsuarioPutRequestBody usuarioPostRequestBody);
 }
