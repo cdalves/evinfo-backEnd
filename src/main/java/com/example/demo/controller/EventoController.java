@@ -39,7 +39,7 @@ public class EventoController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Evento> findById(@PathVariable long id){
+    public ResponseEntity<Evento> findById(@PathVariable Long id){
         return ResponseEntity.ok(eventoService.findByIdOrThrowBadRequestException(id));
     }
 
@@ -49,7 +49,7 @@ public class EventoController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(long id) {
+    public ResponseEntity<Void> delete(Long id) {
         eventoService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

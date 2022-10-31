@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UsuarioPutRequestBody {
-    private String name;
     private Long id;
+    private String name;
     private String email;
 }
