@@ -45,6 +45,7 @@ public class EventoController {
 
     }
 
+    //http://localhost:8080/eventos/find/?name=fest como usar o find
     @GetMapping(path = "/find")
     public ResponseEntity<List<Evento>> findByName(@RequestParam String name){
         return ResponseEntity.ok(eventoService.findByName(name));
