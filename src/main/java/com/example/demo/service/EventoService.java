@@ -25,6 +25,10 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
+    public List<Evento> findByName(String name) {
+        return eventoRepository.findByName(name);
+    }
+
 
     public Evento findByIdOrThrowBadRequestException(long id) {
         return eventoRepository.findById(id)

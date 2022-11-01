@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -41,6 +42,12 @@ public class EventoController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<Evento> findById(@PathVariable Long id){
         return ResponseEntity.ok(eventoService.findByIdOrThrowBadRequestException(id));
+
+    }
+
+    @GetMapping(path = "/find")
+    public ResponseEntity<List<Evento>> findByName(@RequestParam String name){
+        return ResponseEntity.ok(eventoService.findByName(name));
     }
 
     @PostMapping
@@ -49,7 +56,7 @@ public class EventoController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(Long id) {
+    public ResponseEntity<Void> delete(@PathVariable long id) {
         eventoService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

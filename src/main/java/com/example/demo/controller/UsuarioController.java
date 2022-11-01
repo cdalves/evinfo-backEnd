@@ -41,13 +41,14 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.findByIdOrThrowBadRequestException(id));
     }
 
+
     @PostMapping
     public ResponseEntity<Usuario> save(@RequestBody UsuarioPostRequestBody usuarioPostRequestBody){
         return new ResponseEntity<>(usuarioService.save(usuarioPostRequestBody), HttpStatus.CREATED); 
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(long id) {
+    public ResponseEntity<Void> delete(@PathVariable long id) {
         usuarioService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
