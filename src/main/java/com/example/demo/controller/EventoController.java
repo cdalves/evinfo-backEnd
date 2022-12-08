@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.Valid;
+
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/eventos")
@@ -54,7 +56,7 @@ public class EventoController {
     }
 
     @PostMapping
-    public ResponseEntity<Evento> save(@RequestBody EventoPostRequestBody eventoPostRequestBody){
+    public ResponseEntity<Evento> save(@RequestBody @Valid EventoPostRequestBody eventoPostRequestBody){
         return new ResponseEntity<>(eventoService.save(eventoPostRequestBody), HttpStatus.CREATED); 
     }
 
@@ -65,7 +67,7 @@ public class EventoController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody EventoPutRequestBody eventoPutRequestBody) {
+    public ResponseEntity<Void> replace(@RequestBody @Valid EventoPutRequestBody eventoPutRequestBody) {
         eventoService.replace(eventoPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
